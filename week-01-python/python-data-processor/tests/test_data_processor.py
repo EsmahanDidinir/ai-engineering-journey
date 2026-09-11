@@ -1,4 +1,5 @@
 from data_processor import DataProcessor
+from frequency import count_frequency
 def test_minimum():
     processor = DataProcessor([10, 20, 5])
     sonuc =processor.minimum()
@@ -22,3 +23,11 @@ def test_duplicates():
     sonuc = processor.duplicates()
 
     assert sonuc == [10, 20]
+
+
+def test_count_frequency():
+    numbers = [10, 20, 10, 30, 20, 10]
+
+    result = count_frequency(numbers)
+
+    assert result == {10: 3, 20: 2, 30: 1}
