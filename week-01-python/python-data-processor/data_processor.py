@@ -2,50 +2,33 @@ class DataProcessor:
     def __init__(self ,data : list[int | None]):
         self.data=data
 
-    def mean(self):
-        if not self.data:
-            return None 
-        int_sayilar = []
-        for sayi in self.data:
-            if sayi is not None:
-                int_sayilar.append(sayi)
-        if not int_sayilar:
+    def mean(self)-> float | None:
+        sayilar = [sayi for sayi in self.data if sayi is not None]
+        if not sayilar:
             return None
-        sonuc = sum(int_sayilar)/len(int_sayilar)
+        sonuc = sum(sayilar)/len(sayilar)
         return sonuc
 
-    def minimum(self):
-        if not self.data:
+    def minimum(self) -> int | None:
+        sayilar = [sayi for sayi in self.data if sayi is not None]
+        if not sayilar:
             return None
-        min_sayi = None
-        for sayi in self.data:
-            if sayi is not None:            
-                if min_sayi is None:
-                    min_sayi = sayi
-                if sayi< min_sayi : 
-                    min_sayi=sayi
-        return min_sayi
+        return min(sayilar)
 
-    def maximum(self):
-        if not self.data:
-            return None
-        max_sayi=None
-        for sayi in self.data:
-            if sayi is not None : 
-                if max_sayi is None:
-                    max_sayi = sayi
-                if sayi > max_sayi:
-                    max_sayi = sayi
-        return max_sayi
+    def maximum(self) -> int | None:
+            sayilar = [sayi for sayi in self.data if sayi is not None]
+            if not sayilar:
+                return None
+            return max(sayilar)
     
-    def missing_count(self):
+    def missing_count(self)-> int:
         count = 0
         for sayi in self.data:
             if sayi is None:
                 count+=1
         return count
     
-    def duplicates (self):
+    def duplicates (self)->list[int]:
         gorulenler = set()
         duplicates = []
         for sayi in self.data:
@@ -58,7 +41,7 @@ class DataProcessor:
         return duplicates
 
  
-    def sorted_data(self):
+    def sorted_data(self)->list[int]:
         temiz_data = []
         for sayi in self.data:
             if sayi is not None:
