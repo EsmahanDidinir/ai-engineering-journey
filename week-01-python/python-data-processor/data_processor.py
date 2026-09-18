@@ -3,48 +3,56 @@ class DataProcessor:
         self.data=data
 
     def mean(self)-> float | None:
-        sayilar = [sayi for sayi in self.data if sayi is not None]
-        if not sayilar:
+        numbers = self.clean_none()
+        if not numbers:
             return None
-        sonuc = sum(sayilar)/len(sayilar)
-        return sonuc
+        result = sum(numbers) / len(numbers)
+        return result
 
     def minimum(self) -> int | None:
-        sayilar = [sayi for sayi in self.data if sayi is not None]
-        if not sayilar:
+        numbers = self.clean_none()
+        if not numbers:
             return None
-        return min(sayilar)
+        return min(numbers)
 
     def maximum(self) -> int | None:
-            sayilar = [sayi for sayi in self.data if sayi is not None]
-            if not sayilar:
+            numbers = self.clean_none()
+            if not numbers:
                 return None
-            return max(sayilar)
+            return max(numbers)
     
     def missing_count(self)-> int:
         count = 0
-        for sayi in self.data:
-            if sayi is None:
+        for num in self.data:
+            if num is None:
                 count+=1
         return count
     
     def duplicates (self)->list[int]:
-        gorulenler = set()
+        numbers= self.clean_none()
+        seen = set()
         duplicates = []
-        for sayi in self.data:
-            if sayi is not None:
-                    if sayi in gorulenler:
-                        if sayi not in duplicates:
-                            duplicates.append(sayi)
-                    else:
-                        gorulenler.add(sayi)
+        for num in numbers:
+            if num in seen:
+             if num not in duplicates:
+                duplicates.append(num)
+            else:
+                seen.add(num)
         return duplicates
 
  
     def sorted_data(self)->list[int]:
-        temiz_data = []
-        for sayi in self.data:
-            if sayi is not None:
-                temiz_data.append(sayi)
-        temiz_data.sort()
-        return temiz_data
+        clean_data = self.clean_none()
+        clean_data.sort()
+        return clean_data
+
+
+    def clean_none(self):
+        clean_data = [num for num in self.data if num is not None]
+        return clean_data
+def process_age(age):
+    try:
+        int_age = int(age)
+        return int_age * 2
+    except ValueError:
+        raise ValueError("Sayıya çevrilmedi.")

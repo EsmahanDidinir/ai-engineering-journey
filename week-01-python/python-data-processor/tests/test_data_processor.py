@@ -1,4 +1,5 @@
-from data_processor import DataProcessor
+import pytest
+from data_processor import DataProcessor , process_age
 from frequency import count_frequency
 def test_minimum():
     processor = DataProcessor([10, 20, 5])
@@ -31,3 +32,8 @@ def test_count_frequency():
     result = count_frequency(numbers)
 
     assert result == {10: 3, 20: 2, 30: 1}
+
+
+def test_process_age_invalid():
+    with pytest.raises(ValueError):
+        process_age("abc")
