@@ -1,0 +1,29 @@
+#GitHub Actions workflow 'unun adı 
+name : Tests
+
+#Workflow 'un ne zaman çalışacağını belirler
+on:
+ # GitHub'a push yapıldığında çalışır
+ push:
+ # Pull Request oluşturulduğunda/değiştirildiğinde çalışır
+ pull_request:
+
+#GitHub Actions'ın yapacağı işleri tanımlar.
+jobs:
+ #bizim job'ımızın adı.
+ test:
+  runs-on: ubuntu-latest
+  steps:
+   - name: Checkout code
+     uses: actions/checkout@v4 #GitHub repository'mdeki kodu bu çalışma ortamına getir.
+     
+   - name : Set up Python
+     uses: actions/setup-python@v5 #GitHub'ın Python ortamını hazırlayan hazır Action'ı.
+     with:
+      python-version: "3.12"   #workflow'un Python 3.12 kullanmasını söylüyor.
+    # pytest'i kurar
+    - name: Install pytest
+      run: pip install pytest
+     # Testleri çalıştırır
+    - name: Run tests
+      run: pytest
