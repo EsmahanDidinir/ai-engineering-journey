@@ -35,5 +35,19 @@ def test_count_frequency():
 
 
 def test_process_age_invalid():
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="Sayıya çevrilmedi."):
         process_age("abc")
+
+def test_process_age_none():
+    with pytest.raises(TypeError, match="Yaş None olamaz."):
+        process_age(None)
+def test_process_age_float():
+    with pytest.raises(ValueError, match="Sayıya çevrilmedi."):
+        process_age("25.5")
+def test_process_age_negative():
+    assert process_age(-5) == -10
+
+
+def test_process_age_empty():
+    with pytest.raises(ValueError, match="Sayıya çevrilmedi."):
+        process_age("")

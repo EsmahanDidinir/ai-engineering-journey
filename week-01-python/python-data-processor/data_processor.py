@@ -56,3 +56,5 @@ def process_age(age):
         return int_age * 2
     except ValueError:
         raise ValueError("Sayıya çevrilmedi.")
+    except TypeError:
+         raise TypeError("Yaş None olamaz.")
