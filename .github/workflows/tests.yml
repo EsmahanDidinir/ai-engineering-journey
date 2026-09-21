@@ -23,7 +23,7 @@ jobs:
       python-version: "3.12"   #workflow'un Python 3.12 kullanmasını söylüyor.
     # pytest'i kurar
    - name: Install pytest
-      run: pip install pytest
+     run: pip install pytest
      # Testleri çalıştırır
    - name: Run tests
-      run: pytest
+     run: pytest
